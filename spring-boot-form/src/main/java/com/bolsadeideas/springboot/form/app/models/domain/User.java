@@ -4,6 +4,7 @@ import com.bolsadeideas.springboot.form.app.validation.annotation.IdRegex;
 import com.bolsadeideas.springboot.form.app.validation.annotation.Required;
 
 import javax.validation.constraints.*;
+import java.util.Date;
 
 public class User {
 
@@ -29,6 +30,32 @@ public class User {
     @NotEmpty
     @Email
     private String email;
+
+    @NotNull
+    @Min(5)
+    @Max(5000)
+    private Integer cuenta;
+
+    @NotNull
+    @Future
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date fechaNacimiento;
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Integer getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Integer cuenta) {
+        this.cuenta = cuenta;
+    }
 
     public User(String id, String name, String lastname) {
         this.id = id;

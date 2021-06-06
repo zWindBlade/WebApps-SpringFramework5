@@ -3,6 +3,7 @@ package com.bolsadeideas.springboot.form.app.controllers;
 import com.bolsadeideas.springboot.form.app.models.domain.User;
 import com.bolsadeideas.springboot.form.app.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @SessionAttributes("user")
@@ -23,8 +26,11 @@ public class FormController {
     private UserValidator userValidator;
 
     @InitBinder
-    public void initBinder(WebDataBinder webDataBinder){
+    public void initBinder(WebDataBinder webDataBinder) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        simpleDateFormat.setLenient(false);
         webDataBinder.addValidators(userValidator);
+        webDataBinder.registerCustomEditor(Date.class,"fechaNacimiento", new CustomDateEditor(simpleDateFormat,true));
     }
 
     @GetMapping({"/form", "/"})
