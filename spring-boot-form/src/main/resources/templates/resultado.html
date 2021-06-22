@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${titulo}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
 <h3 th:text="${titulo}"></h3>
@@ -14,6 +15,17 @@
     <li th:text="${user.email}"></li>
     <li th:text="${user.id}"></li>
     <li th:text="${user.cuenta}"></li>
+    <li th:text="${#dates.format(user.fechaNacimiento,'dd-MM-yyyy')}"></li>
+    <li th:text="${#calendars.format(user.fechaNacimiento,'dd-MM-yyyy')}"></li>
+    <li th:text="${user.pais.id}"></li>
+    <li th:text="${user.pais.codigo}"></li>
+    <li th:text="${user.pais.nombre}"></li>
+    <li th:text="'Habilitado: ' + ${user.habilitar}"></li>
+    <li th:text="'Genero: ' + ${user.genero}"></li>
+    <div>Roles</div>
+    <ul>
+        <li th:each="rol : ${user.roles}" th:text="${rol.id} + ' : ' + ${rol.nombre} + ' => ' + ${rol.prefix} "></li>
+    </ul>
 </ul>
 </body>
 </html>
